@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta name="robots" content="noindex" />
+ <meta charset="utf-8"/>
+  <meta name="description" content="">
+  <meta name="keywords" content="OPen Data, Datenbanken, Datenbankwerk">
+  <meta name="author" content="OK Lab Köln">
+  <meta name="title" content="OpenData Checkliste">
+</head>
+<body>
+<title>OpenData Checkliste</title>
+<h1>OpenData Checkliste</h1>
+
+<p><strong> Es wird davon ausgegangen, dass die Daten keinen weiteren Schutzrechten unterliegen (personenbezogene Daten, Betriebsgeheimnisse, Verträge,...).</strong></p>
+<p> Daten liegen zumeist in strukturierten Sammlungen vor, Datenbanken oder Datenbankwerken.</p>
+<p> Anbei eine kleine Hilfestellung um Daten und deren Sammlungen optimal für Alle verfügbar zu machen.</p>
+ 
+
+  <input type="checkbox" id="angereichert" name="angereichert" onclick="check()">
+  <label for="angereichert"> Die Daten wurden angereichert mit Bildern, Diagrammen oder Texten.</label><br>
+
+  <input type="checkbox" id="datenbank" name="datenbank" value="datenbank" onclick="check()">
+  <label for="datenbank"> Systematische Sammlung von Daten mit einer einfachen Anordnung (chronologisch, alphabetisch oder numerisch), oder mittels Standardformaten (z.B. <a href="https://geojson.org/" >GeoJson</a>).</label><br>
+
+  <input type="checkbox" id="datenbankwerk" name="datenbankwerk" value="datenbankwerk" onclick="check()">
+  <label for="datenbankwerk"> Systematische Sammlung von Daten jenseits einer einfachen Anordnung.</label><br>
+
+  
+
+<h2>Gegenstand:</h2>
+<p id="gegenstand">Daten</p>
+
+
+<h2>Rechtsvorschrift:</h2>
+<p id="rechtsvorschrift">
+<!-- Das Leistungsschutzrecht kann in Anspruch genommen werden, soweit eine wesentliche Investition vorliegt. -->
+Keine! Reine Informationen und Fakten sind urheberrechtlich nicht geschützt (siehe <a href="https://www.gesetze-im-internet.de/urhg/__2.html" >Gesetz über Urheberrecht und verwandte Schutzrechte (Urheberrechtsgesetz)</a>. 
+</p>
+
+<h2 id='beispiel_header'>Beispiel im JSON Format:</h2>
+<p id="beispiel">{ "Temperatur" : "10.1°C"}</p>
+
+<h2>Handlungsempfehlung & Anmerkungen:</h2>
+<p id="handlungsempfehlung">
+<strong>Es wird empfohlen die Daten mit der Public-Domain-Erklärung <a href="https://creativecommons.org/publicdomain/zero/1.0/" >CC0 1.0 Universal (CC0 1.0) Public Domain Dedication</a> zu versehen, um Dritten den rechtlichen Status zu verdeutlichen.</strong>
+ </p>
+
+<h2>Links:</h2>
+<ul>
+<li> <a href="https://hup.sub.uni-hamburg.de/volltexte/2019/195/pdf/HamburgUP_KreutzerLahmann_Rechtsfragen.pdf" >Till Kreutzer und Henning Lahmann (2019): Rechtsfragen bei Open Science - Ein Leitfaden</a> </li>
+<li> <a href="https://zenodo.org/record/840652#.YCeJRGhKhaQ" >Fact Sheet on Creative Commons & Open Science</a> </li>
+<li> <a href="https://open.nrw/system/files/media/document/file/opennrw_rechtl_gutachten_datenlizenzen_lowres_web.pdf" >Datenlizenzen für Open Government Data - Rechtliches Kurzgutachten</a> </li>
+<li> <a href="https://www.uni-bremen.de/urheberrecht/wissensplattform/9-schutz-von-datenbanken" >Schutz von Datenbanken - Uni Bremen</a> </li>
+<li><a href="https://www.gesetze-im-internet.de/urhg/__2.html" >Urheberrechtsgesetz</a></li>
+<li> <a href="http://www.gesetze-im-internet.de/urhg/BJNR012730965.html#BJNR012730965BJNG004301377" >Leistungsschutzrecht</a> </li>
+
+</ul>
+
+
+<script>
+
+
+/*
+var checkbox = document.querySelector("input[name=checkbox]");
+
+checkbox.addEventListener( 'change', function() {
+    if(this.checked) {
+        check();
+    } else {
+        // Checkbox is not checked..
+    }
+});
+
+*/
+
+
+function check(){
+const angereichert = document.getElementById('angereichert').checked;
+const datenbank = document.getElementById('datenbank').checked;
+const datenbankwerk = document.getElementById('datenbankwerk').checked;
+
+if (angereichert === false && datenbank === false && datenbankwerk === false){
+document.getElementById("gegenstand").innerText = 'Daten';
+document.getElementById("beispiel").innerText = '{ "Temperatur" : "10.1°C"}';
+document.getElementById("beispiel_header").innerText = 'Beispiel im JSON format:';
+document.getElementById("rechtsvorschrift").innerHTML = 'Keine! Reine Informationen und Fakten sind urheberrechtlich nicht geschützt (siehe <a href="https://www.gesetze-im-internet.de/urhg/__2.html" >Gesetz über Urheberrecht und verwandte Schutzrechte (Urheberrechtsgesetz)</a>. ';
+document.getElementById("handlungsempfehlung").innerHTML = '<strong>Es wird empfohlen die Daten mit der Public-Domain-Erklärung <a href="https://creativecommons.org/publicdomain/zero/1.0/" >CC0 1.0 Universal (CC0 1.0) Public Domain Dedication</a> zu versehen, um Dritten den rechtlichen Status zu verdeutlichen.</strong>';
+}
+
+if (angereichert === true && datenbank === false && datenbankwerk === false){
+document.getElementById("gegenstand").innerText = 'Daten';
+document.getElementById("beispiel").innerText = '{ "Temperatur" : "10.1°C", "Bemerkung" : "Northeast toward the garden. A little sensor measures the actual data."}';
+document.getElementById("beispiel_header").innerText = 'Beispiel im JSON format:';
+document.getElementById("rechtsvorschrift").innerHTML = '<a href="https://www.gesetze-im-internet.de/urhg/__2.html" >Urheberrechtsgesetz</a>';
+document.getElementById("handlungsempfehlung").innerHTML = '<strong>Es wird empfohlen die Daten mit der Public-Domain-Erklärung <a href="https://creativecommons.org/publicdomain/zero/1.0/" >CC0 1.0 Universal (CC0 1.0) Public Domain Dedication</a> zu versehen.</strong> <br/> Der in der CC0 enthaltene Haftungsausschluss ist allerdings nicht mit dem deutschen Recht kompatibel. <br/> Es steht im Lizenztext aber auch drin, dass wenn eine Klausel dieser Lizenz nach dem Recht des jeweiligen Staates rechtlich unwirksam ist, an ihrer Stelle die gesetzliche Regelungen gelten soll. Ob dies allerdings in jedem Fall wirksam ist, ist fraglich. <br/><a href="https://hup.sub.uni-hamburg.de/volltexte/2019/195/pdf/HamburgUP_KreutzerLahmann_Rechtsfragen.pdf" >Kreutzer und Lahmann (2019)</a> schätzen das Risiko jedoch als marginal ein. <br/> In jedem Falle seid Ihr für Eure geistigen Schöpfungen (hier die Bemerkung) aber nach deutschem Recht haftbar. Das Urheberrecht erlischt erst siebzig Jahre nach dem Tode des Urhebers (<a href="https://www.gesetze-im-internet.de/urhg/__64.html" >§ 64 UrhG</a>).<p>Bei der Verwendung der Public Domain Dedication and License (<a href="https://opendatacommons.org/licenses/pddl/1-0/" >PDDL</a>) ergeben sich leider Inkompatibilitäten bezüglich der Haftungsausschlussklausel und der <a href="https://de.wikipedia.org/wiki/Rechtswahl" >Rechtswahlklausel</a> (<a href="https://open.nrw/system/files/media/document/file/opennrw_rechtl_gutachten_datenlizenzen_lowres_web.pdf" >Datenlizenzen für Open Government Data - Rechtliches Kurzgutachten</a>).</p>';
+}
+
+if (angereichert === true && datenbank === true && datenbankwerk === false){
+document.getElementById("gegenstand").innerText = 'Daten & Datenbankwerk';
+document.getElementById("beispiel").innerText = '[{ "Temperatur" : "10.1°C", "Bemerkung" : "Northeast toward the garden. A little sensor measures the actual data."},...]';
+document.getElementById("beispiel_header").innerText = 'Beispiel im JSON format:';
+document.getElementById("rechtsvorschrift").innerHTML = '<a href="https://www.gesetze-im-internet.de/urhg/__2.html" >Urheberrechtsgesetz</a> bezüglich der angereicherten Daten & optional <a href="http://www.gesetze-im-internet.de/urhg/BJNR012730965.html#BJNR012730965BJNG004301377" >Leistungsschutzrecht</a> bezüglich der Datenbank, soweit wesentliche Investitionen vorliegen. </a>';
+document.getElementById("handlungsempfehlung").innerHTML = '<strong>Es wird empfohlen die Daten mit der Public-Domain-Erklärung <a href="https://creativecommons.org/publicdomain/zero/1.0/" >CC0 1.0 Universal (CC0 1.0) Public Domain Dedication</a> zu versehen.</strong> <br/> Der in der CC0 enthaltene Haftungsausschluss ist allerdings nicht mit dem deutschen Recht kompatibel. <br/> Es steht im Lizenztext aber auch drin, dass wenn eine Klausel dieser Lizenz nach dem Recht des jeweiligen Staates rechtlich unwirksam ist, an ihrer Stelle die gesetzliche Regelungen gelten soll. <br/>Ob dies allerdings in jedem Fall wirksam ist, ist fraglich. <br/><a href="https://hup.sub.uni-hamburg.de/volltexte/2019/195/pdf/HamburgUP_KreutzerLahmann_Rechtsfragen.pdf" >Kreutzer und Lahmann (2019)</a> schätzen das Risiko jedoch als marginal ein. <br/> In jedem Falle seid Ihr für Eure geistigen Schöpfungen (hier die Bemerkung) aber nach deutschem Recht haftbar. <p>Von einer Berufung auf das Leistungsschutzrecht sollte im Sinne einer bestmöglichen Verfügbarkeit der Daten abgesehen werden.</p><p>Wenn sich denn unbedingt auf das Leistungsschutzrecht berufen werden soll, muss eine Lizenz verwendet werden die auch auf diesen Fall zugeschnitten ist. Hier eignet sich z.B. die <a href="https://opendatacommons.org/licenses/odbl/" >Open Data Commons Open Database License (ODbL)</a>. Lizenzen die auf das Urheberrecht abzielen, wie die weit verbreiteten <a href="https://creativecommons.org" >Creative Commons Lizenzen</a>, passen hier nicht.</p>';
+}
+
+if ((angereichert === true && datenbank === true && datenbankwerk === true) || (angereichert === true && datenbank === false && datenbankwerk === true) ){
+document.getElementById("gegenstand").innerText = 'Daten & Datenbankwerk & Datenbankwerk';
+document.getElementById("beispiel").innerHTML = '<p>Individueller Charakter der Datenbank durch Auswahl oder Anordnung.<br/> Beispiel: <a href="http://klassikerwortschatz.de/index.php/de/woerterbuch/projektbeschreibung/vorarbeiten/14-projekt-klassikerwortschatz/projektgeschichte/18-1000-gedichte" >Die 1100 wichtigsten Gedichte der deutschen Literatur zwischen 1730 und 1900</a>  </p>[{ "1" : "Zauberlehrling", "Bemerkung" : "Dieses Gedicht ist eines der der wichtigsten deutschsprachigen Werke weil,... "},...]';
+document.getElementById("beispiel_header").innerText = 'Beispiel:';
+document.getElementById("rechtsvorschrift").innerHTML = '<p><a href="https://www.gesetze-im-internet.de/urhg/__2.html" >Urheberrechtsgesetz</a> bezüglich der angereicherten Daten und des Datenbankwerkes.</p> Optional <a href="http://www.gesetze-im-internet.de/urhg/BJNR012730965.html#BJNR012730965BJNG004301377" >Leistungsschutzrecht</a> bezüglich der Datenbank, soweit wesentliche Investitionen vorliegen. </a>';
+document.getElementById("handlungsempfehlung").innerHTML = '<strong>Es wird empfohlen die Daten mit der Public-Domain-Erklärung <a href="https://creativecommons.org/publicdomain/zero/1.0/" >CC0 1.0 Universal (CC0 1.0) Public Domain Dedication</a> zu versehen.</strong> <br/> Der in der CC0 enthaltene Haftungsausschluss ist allerdings nicht mit dem deutschen Recht kompatibel. <br/> Es steht im Lizenztext aber auch drin, dass wenn eine Klausel dieser Lizenz nach dem Recht des jeweiligen Staates rechtlich unwirksam ist, an ihrer Stelle die gesetzliche Regelungen gelten soll. <br/>Ob dies allerdings in jedem Fall wirksam ist, ist fraglich. <br/><a href="https://hup.sub.uni-hamburg.de/volltexte/2019/195/pdf/HamburgUP_KreutzerLahmann_Rechtsfragen.pdf" >Kreutzer und Lahmann (2019)</a> schätzen das Risiko jedoch als marginal ein. <br/> In jedem Falle seid Ihr für Eure geistigen Schöpfungen (hier die Bemerkung) aber nach deutschem Recht haftbar. <p>Von einer Berufung auf das Leistungsschutzrecht sollte im Sinne einer bestmöglichen Verfügbarkeit der Daten abgesehen werden.</p><p>Wenn sich denn unbedingt auf das Leistungsschutzrecht berufen werden soll, muss eine Lizenz verwendet werden die auch auf diesen Fall zugeschnitten ist. Hier eignet sich z.B. die <a href="https://opendatacommons.org/licenses/odbl/" >Open Data Commons Open Database License (ODbL)</a>. Lizenzen die auf das Urheberrecht abzielen, wie die weit verbreiteten <a href="https://creativecommons.org" >Creative Commons Lizenzen</a>, passen hier nicht.</p>';
+}
+
+
+if (datenbank === true && angereichert === false && datenbankwerk === false){
+document.getElementById("gegenstand").innerHTML = '<a href="https://www.gesetze-im-internet.de/urhg/__87a.html" >Datenbank</a>';
+document.getElementById("beispiel").innerHTML = '[{ "Durchschnittstemperatur" : "8.5°C", "Luftdruck" : "1000.4 hPa", Datum" : "16.01.2020"},<br/>&nbsp;{ "Durchschnittstemperatur" : "8.8°C", "Luftdruck" : "1000.8 hPa", Datum" : "17.01.2020"}]';
+document.getElementById("beispiel_header").innerText = 'Beispiel im JSON format:';
+document.getElementById("rechtsvorschrift").innerHTML = 'Optionales <a href="http://www.gesetze-im-internet.de/urhg/BJNR012730965.html#BJNR012730965BJNG004301377" >Leistungsschutzrecht</a> soweit wesentliche Investitionen vorliegen.';
+document.getElementById("handlungsempfehlung").innerHTML = '<strong>Es wird empfohlen die Daten mit der Public-Domain-Erklärung <a href="https://creativecommons.org/publicdomain/zero/1.0/" >CC0 1.0 Universal (CC0 1.0) Public Domain Dedication</a> zu versehen.</strong><br/>Von einer Berufung auf das Leistungsschutzrecht sollte im Sinne einer bestmöglichen Verfügbarkeit der Daten abgesehen werden. <p>Doch was passiert mit den Daten wenn eine Datenbank durch das Leistungsschutzrecht geschützt ist? Unwesentliche Teile der Datenbank können durch Dritte weiterhin frei genutzt werden. Dabei kann unwesentlich quantitativ bestimmt werden (< 50%) oder qualitativ (erhebliche menschliche, technische oder finanzielle Investition). Eine systematische Vervielfältigung, Verbreitung oder öffentliche Wiedergabe von unwesentlichen Teilen der Datenbank ist ebenfalls nicht rechtens. <a href="https://www.uni-bremen.de/urheberrecht/wissensplattform/9-schutz-von-datenbanken" >Schutz von Datenbanken - Uni Bremen</a></p><p>Die Rechte des Datenbankherstellers erlöschen fünfzehn Jahre nach der Veröffentlichung der Datenbank, jedoch bereits fünfzehn Jahre nach der Herstellung, wenn die Datenbank innerhalb dieser Frist nicht veröffentlicht worden ist. <a href="http://www.gesetze-im-internet.de/urhg/__87d.html" >§ 87 d UrhG</a></p><p>Wenn sich denn unbedingt auf das Leistungsschutzrecht berufen werden soll, muss eine Lizenz verwendet werden die auch auf diesen Fall zugeschnitten ist. Hier eignet sich z.B. die <a href="https://opendatacommons.org/licenses/odbl/" >Open Data Commons Open Database License (ODbL)</a>. Lizenzen die auf das Urheberrecht abzielen, wie die weit verbreiteten <a href="https://creativecommons.org" >Creative Commons Lizenzen</a>, passen hier nicht.</p>';
+}
+
+if (datenbankwerk === true && datenbank === false && angereichert === false){
+document.getElementById("gegenstand").innerHTML = '<a href="https://www.gesetze-im-internet.de/urhg/__4.html" >Datenbankwerk</a>';
+document.getElementById("beispiel").innerHTML = '<a href="http://klassikerwortschatz.de/index.php/de/woerterbuch/projektbeschreibung/vorarbeiten/14-projekt-klassikerwortschatz/projektgeschichte/18-1000-gedichte" >Die 1100 wichtigsten Gedichte der deutschen Literatur zwischen 1730 und 1900</a> <br/> <a href="https://www.telemedicus.info/urteil/bgh-gedichttitelliste-i/" > BGH: Urteil Gedichttitelliste</a>';
+document.getElementById("beispiel_header").innerText = 'Beispiel, der Gerichtsklassiker:';
+document.getElementById("rechtsvorschrift").innerHTML = '<a href="https://www.gesetze-im-internet.de/urhg/__2.html" >Urheberrechtsgesetz</a>';
+document.getElementById("handlungsempfehlung").innerHTML = '<strong>Es wird empfohlen das Datenbankwerk mit der Public-Domain-Erklärung <a href="https://creativecommons.org/publicdomain/zero/1.0/" >CC0 1.0 Universal (CC0 1.0) Public Domain Dedication</a> zu versehen.</strong>';
+}
+
+if ((angereichert === false && datenbank === true && datenbankwerk === true)){
+document.getElementById("gegenstand").innerText = 'Datenbankwerk & Datenbankwerk';
+document.getElementById("beispiel").innerHTML = '<p>Individueller Charakter der Datenbank durch Auswahl oder Anordnung.<br/> Beispiel: <a href="http://klassikerwortschatz.de/index.php/de/woerterbuch/projektbeschreibung/vorarbeiten/14-projekt-klassikerwortschatz/projektgeschichte/18-1000-gedichte" >Die 1100 wichtigsten Gedichte der deutschen Literatur zwischen 1730 und 1900</a>  </p>[{ "1" : "Zauberlehrling", "Erscheiningsdatum" : "Dieses Gedicht ist eines der der wichtigsten deutschsprachigen Werke weil,... "},...]';
+document.getElementById("beispiel_header").innerText = 'Beispiel:';
+document.getElementById("rechtsvorschrift").innerHTML = '<p><a href="https://www.gesetze-im-internet.de/urhg/__2.html" >Urheberrechtsgesetz</a> bezüglich des Datenbankwerkes.</p> Optional <a href="http://www.gesetze-im-internet.de/urhg/BJNR012730965.html#BJNR012730965BJNG004301377" >Leistungsschutzrecht</a> bezüglich der Datenbank, soweit wesentliche Investitionen vorliegen. </a>';
+document.getElementById("handlungsempfehlung").innerHTML = '<strong>Es wird empfohlen die Daten mit der Public-Domain-Erklärung <a href="https://creativecommons.org/publicdomain/zero/1.0/" >CC0 1.0 Universal (CC0 1.0) Public Domain Dedication</a> zu versehen.</strong> <br/> Der in der CC0 enthaltene Haftungsausschluss ist allerdings nicht mit dem deutschen Recht kompatibel. <br/> Es steht im Lizenztext aber auch drin, dass wenn eine Klausel dieser Lizenz nach dem Recht des jeweiligen Staates rechtlich unwirksam ist, an ihrer Stelle die gesetzliche Regelungen gelten soll. <br/>Ob dies allerdings in jedem Fall wirksam ist, ist fraglich. <br/><a href="https://hup.sub.uni-hamburg.de/volltexte/2019/195/pdf/HamburgUP_KreutzerLahmann_Rechtsfragen.pdf" >Kreutzer und Lahmann (2019)</a> schätzen das Risiko jedoch als marginal ein. <br/> In jedem Falle seid Ihr für Eure geistigen Schöpfungen (hier die Bemerkung) aber nach deutschem Recht haftbar. <p>Von einer Berufung auf das Leistungsschutzrecht sollte im Sinne einer bestmöglichen Verfügbarkeit der Daten abgesehen werden.</p><p>Wenn sich denn unbedingt auf das Leistungsschutzrecht berufen werden soll, muss eine Lizenz verwendet werden die auch auf diesen Fall zugeschnitten ist. Hier eignet sich z.B. die <a href="https://opendatacommons.org/licenses/odbl/" >Open Data Commons Open Database License (ODbL)</a>. Lizenzen die auf das Urheberrecht abzielen, wie die weit verbreiteten <a href="https://creativecommons.org" >Creative Commons Lizenzen</a>, passen hier nicht.</p>';
+}
+
+}
+</script>
+
+</body>
+</html>
